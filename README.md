@@ -1,7 +1,7 @@
 Subtask Calendar Forecast Plugin for Kanboard
 ==============================================
 
-This plugin display estimate of subtasks in the user calendar.
+This plugin display estimates of subtasks in the user calendar.
 The user timetable must be filled to see time slots in the calendar.
 
 Dependencies
