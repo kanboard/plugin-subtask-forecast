@@ -1,9 +1,9 @@
 <?php
 
-namespace Plugin\SubtaskForecast;
+namespace Kanboard\Plugin\SubtaskForecast;
 
-use Core\Plugin\Base;
-use Plugin\SubtaskForecast\Model\SubtaskForecast;
+use Kanboard\Core\Plugin\Base;
+use Kanboard\Plugin\SubtaskForecast\Model\SubtaskForecast;
 
 class Plugin extends Base
 {

@@ -1,13 +1,13 @@
 <?php
 
-namespace Plugin\SubtaskForecast\Model;
+namespace Kanboard\Plugin\SubtaskForecast\Model;
 
 use DateTime;
 use DateInterval;
-use Model\Base;
-use Model\Subtask;
-use Model\SubtaskTimeTracking;
-use Model\Task;
+use Kanboard\Model\Base;
+use Kanboard\Model\Subtask;
+use Kanboard\Model\SubtaskTimeTracking;
+use Kanboard\Model\Task;
 
 /**
  * Subtask Forecast
