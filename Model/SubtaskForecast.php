@@ -3,11 +3,10 @@
 namespace Kanboard\Plugin\SubtaskForecast\Model;
 
 use DateTime;
-use DateInterval;
-use Kanboard\Model\Base;
-use Kanboard\Model\Subtask;
-use Kanboard\Model\SubtaskTimeTracking;
-use Kanboard\Model\Task;
+use Kanboard\Core\Base;
+use Kanboard\Model\SubtaskModel;
+use Kanboard\Model\SubtaskTimeTrackingModel;
+use Kanboard\Model\TaskModel;
 
 /**
  * Subtask Forecast
@@ -27,14 +26,14 @@ class SubtaskForecast extends Base
     public function getSubtasks($user_id)
     {
         return $this->db
-                    ->table(Subtask::TABLE)
-                    ->columns(Subtask::TABLE.'.id', Task::TABLE.'.project_id', Subtask::TABLE.'.task_id', Subtask::TABLE.'.title', Subtask::TABLE.'.time_estimated')
-                    ->join(Task::TABLE, 'id', 'task_id')
-                    ->asc(Task::TABLE.'.position')
-                    ->asc(Subtask::TABLE.'.position')
-                    ->gt(Subtask::TABLE.'.time_estimated', 0)
-                    ->eq(Subtask::TABLE.'.status', Subtask::STATUS_TODO)
-                    ->eq(Subtask::TABLE.'.user_id', $user_id)
+                    ->table(SubtaskModel::TABLE)
+                    ->columns(SubtaskModel::TABLE.'.id', TaskModel::TABLE.'.project_id', SubtaskModel::TABLE.'.task_id', SubtaskModel::TABLE.'.title', SubtaskModel::TABLE.'.time_estimated')
+                    ->join(TaskModel::TABLE, 'id', 'task_id')
+                    ->asc(TaskModel::TABLE.'.position')
+                    ->asc(SubtaskModel::TABLE.'.position')
+                    ->gt(SubtaskModel::TABLE.'.time_estimated', 0)
+                    ->eq(SubtaskModel::TABLE.'.status', SubtaskModel::STATUS_TODO)
+                    ->eq(SubtaskModel::TABLE.'.user_id', $user_id)
                     ->findAll();
     }
 
@@ -47,12 +46,12 @@ class SubtaskForecast extends Base
      */
     public function getStartDate($user_id)
     {
-        $subtask = $this->db->table(Subtask::TABLE)
-                            ->columns(Subtask::TABLE.'.time_estimated', SubtaskTimeTracking::TABLE.'.start')
-                            ->eq(SubtaskTimeTracking::TABLE.'.user_id', $user_id)
-                            ->eq(SubtaskTimeTracking::TABLE.'.end', 0)
-                            ->eq('status', Subtask::STATUS_INPROGRESS)
-                            ->join(SubtaskTimeTracking::TABLE, 'subtask_id', 'id')
+        $subtask = $this->db->table(SubtaskModel::TABLE)
+                            ->columns(SubtaskModel::TABLE.'.time_estimated', SubtaskTimeTrackingModel::TABLE.'.start')
+                            ->eq(SubtaskTimeTrackingModel::TABLE.'.user_id', $user_id)
+                            ->eq(SubtaskTimeTrackingModel::TABLE.'.end', 0)
+                            ->eq('status', SubtaskModel::STATUS_INPROGRESS)
+                            ->join(SubtaskTimeTrackingModel::TABLE, 'subtask_id', 'id')
                             ->findOne();
 
         if ($subtask && $subtask['time_estimated'] && $subtask['start']) {
