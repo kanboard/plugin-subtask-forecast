@@ -9,7 +9,7 @@ The user timetable must be filled to see time slots in the calendar.
 Requirements
 ------------
 
-- Kanboard >= 1.0.29
+- Kanboard >= 1.0.29 <= 1.0.37
 - Timetable plugin
 
 Author
